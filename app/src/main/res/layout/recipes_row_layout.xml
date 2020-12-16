@@ -55,6 +55,7 @@
                     android:ellipsize="end"
                     android:fontFamily="@font/courgette"
                     android:maxLines="2"
+                    android:text="@{result.title}"
                     android:textColor="@color/darker"
                     android:textSize="20sp"
                     android:textStyle="bold"
@@ -70,6 +71,7 @@
                     android:layout_marginTop="12dp"
                     android:ellipsize="end"
                     android:maxLines="3"
+                    android:text="@{result.summary}"
                     android:textColor="@color/darkGray"
                     app:layout_constraintEnd_toEndOf="@+id/textView_recipes_title"
                     app:layout_constraintStart_toStartOf="@+id/textView_recipes_title"
@@ -92,6 +94,7 @@
 
                 <TextView
                     android:id="@+id/textView_heart"
+                    setNumberOfLikes="@{result.aggregateLikes}"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textAlignment="center"
@@ -115,6 +118,7 @@
 
                 <TextView
                     android:id="@+id/textView_clock"
+                    setNumberOfMinutes="@{result.readyInMinutes}"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textAlignment="center"
@@ -126,6 +130,7 @@
 
                 <ImageView
                     android:id="@+id/imageView_leaf"
+                    applyVeganColor="@{result.vegan}"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     app:layout_constraintBottom_toBottomOf="@+id/imageView_clock"
@@ -137,13 +142,14 @@
 
                 <TextView
                     android:id="@+id/textView_leaf"
+                    applyVeganColor="@{result.vegan}"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:text="@string/vegan"
                     android:textAlignment="center"
                     app:layout_constraintEnd_toEndOf="@+id/textView_recipes_description"
                     app:layout_constraintStart_toEndOf="@+id/textView_clock"
-                    app:layout_constraintTop_toBottomOf="@+id/imageView_leaf"
-                    tools:text="100" />
+                    app:layout_constraintTop_toBottomOf="@+id/imageView_leaf" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
