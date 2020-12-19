@@ -1,4 +1,4 @@
-package com.example.foody
+package com.example.foody.view_models
 
 import android.app.Application
 import android.content.Context
