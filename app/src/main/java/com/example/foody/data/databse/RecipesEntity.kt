@@ -1,4 +1,4 @@
-package com.example.foody
+package com.example.foody.data.databse
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
