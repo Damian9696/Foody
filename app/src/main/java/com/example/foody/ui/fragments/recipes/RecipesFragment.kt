@@ -45,6 +45,8 @@ class RecipesFragment : Fragment() {
     ): View {
         // Binding the layout for this fragment
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_recipes, container, false)
+        binding.lifecycleOwner = this
+        binding.mainViewModel = mainViewModel
 
         setupRecyclerView()
         readDatabase()
