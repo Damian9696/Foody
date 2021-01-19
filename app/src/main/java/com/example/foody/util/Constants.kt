@@ -1,7 +1,7 @@
 package com.example.foody.util
 
 class Constants {
-    companion object{
+    companion object {
         const val API_KEY = "0a02d2b9a9ec4b83a12cbeb5e7f96927"
         const val BASE_URL = "https://api.spoonacular.com"
 
@@ -16,5 +16,15 @@ class Constants {
         // ROOM Database
         const val DATABASE_NAME = "recipes_database"
         const val RECIPES_TABLE = "recipes_table"
+
+        // Bottom Sheet and Preferences
+        const val DEFAULT_MEAL_TYPE = "main course"
+        const val DEFAULT_DIET_TYPE = "gluten free"
+        const val DEFAULT_RECIPES_NUMBER = "50"
+        const val PREFERENCES_NAME = "foodyPreferences"
+        const val PREFERENCES_MEAL_TYPE = "mealType"
+        const val PREFERENCES_MEAL_TYPE_ID = "mealTypeId"
+        const val PREFERENCES_DIET_TYPE = "dietType"
+        const val PREFERENCES_DIET_TYPE_ID = "dietTypeId"
     }
 }
