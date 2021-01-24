@@ -11,6 +11,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.example.foody.view_models.MainViewModel
 import com.example.foody.R
 import com.example.foody.adapters.RecipesAdapter
@@ -26,6 +27,8 @@ const val TAG = "RecipesFragment"
 
 @AndroidEntryPoint
 class RecipesFragment : Fragment() {
+
+    val args by navArgs<RecipesFragmentArgs>()
 
     private lateinit var mainViewModel: MainViewModel
     private lateinit var recipesViewModel: RecipesViewModel
@@ -67,7 +70,7 @@ class RecipesFragment : Fragment() {
     private fun readDatabase() {
         lifecycleScope.launch {
             mainViewModel.readRecipes.observeOnce(viewLifecycleOwner) { database ->
-                if (database.isNotEmpty()) {
+                if (database.isNotEmpty() && !args.backFromBottomSheet) {
                     Log.d(TAG, "readDatabase called!")
                     mAdapter.setData(database[0].foodRecipe)
                     hideShimmerEffect()
