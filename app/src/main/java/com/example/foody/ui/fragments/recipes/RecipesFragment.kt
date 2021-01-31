@@ -18,9 +18,11 @@ import com.example.foody.adapters.RecipesAdapter
 import com.example.foody.binding_adapters.RecipesRowBinding
 import com.example.foody.databinding.FragmentRecipesBinding
 import com.example.foody.extensions.observeOnce
+import com.example.foody.util.NetworkListener
 import com.example.foody.util.NetworkResult
 import com.example.foody.view_models.RecipesViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 const val TAG = "RecipesFragment"
@@ -28,12 +30,13 @@ const val TAG = "RecipesFragment"
 @AndroidEntryPoint
 class RecipesFragment : Fragment() {
 
-    val args by navArgs<RecipesFragmentArgs>()
+    private val mAdapter by lazy { RecipesAdapter() }
+    private val args by navArgs<RecipesFragmentArgs>()
 
     private lateinit var mainViewModel: MainViewModel
     private lateinit var recipesViewModel: RecipesViewModel
     private lateinit var binding: FragmentRecipesBinding
-    private val mAdapter by lazy { RecipesAdapter() }
+    private lateinit var networkListener: NetworkListener
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -54,9 +57,23 @@ class RecipesFragment : Fragment() {
 
         setupRecyclerView()
         readDatabase()
+        lifecycleScope.launch {
+            networkListener = NetworkListener()
+            context?.let { notNullContext ->
+                networkListener.checkInternetAvailability(notNullContext)
+                    .collect { status ->
+                        recipesViewModel.networkStatus = status
+                        recipesViewModel.showNetworkStatus()
+                    }
+            }
+        }
 
         binding.recipesFab.setOnClickListener {
-            findNavController().navigate(R.id.action_recipesFragment_to_recipesBottomSheet)
+            if (recipesViewModel.networkStatus) {
+                findNavController().navigate(R.id.action_recipesFragment_to_recipesBottomSheet)
+            } else {
+                recipesViewModel.showNetworkStatus()
+            }
         }
 
         return binding.root
