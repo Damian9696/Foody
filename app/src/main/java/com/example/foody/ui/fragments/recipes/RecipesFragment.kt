@@ -3,9 +3,9 @@ package com.example.foody.ui.fragments.recipes
 import android.os.Bundle
 import android.util.Log
 import android.view.*
-import android.widget.SearchView
 import androidx.fragment.app.Fragment
 import android.widget.Toast
+import androidx.appcompat.widget.SearchView
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
@@ -14,7 +14,6 @@ import androidx.navigation.fragment.navArgs
 import com.example.foody.view_models.MainViewModel
 import com.example.foody.R
 import com.example.foody.adapters.RecipesAdapter
-import com.example.foody.binding_adapters.RecipesRowBinding
 import com.example.foody.databinding.FragmentRecipesBinding
 import com.example.foody.extensions.observeOnce
 import com.example.foody.util.NetworkListener
@@ -100,6 +99,9 @@ class RecipesFragment : Fragment(), SearchView.OnQueryTextListener {
     }
 
     override fun onQueryTextSubmit(query: String?): Boolean {
+        query?.let { notNullQuery ->
+            searchApiData(notNullQuery)
+        }
         return true
     }
 
@@ -125,6 +127,33 @@ class RecipesFragment : Fragment(), SearchView.OnQueryTextListener {
         Log.d(TAG, "requestApiData called!")
         mainViewModel.getRecipes(recipesViewModel.applyQueries())
         mainViewModel.recipesResponse.observe(viewLifecycleOwner) { response ->
+            when (response) {
+                is NetworkResult.Success -> {
+                    hideShimmerEffect()
+                    response.data?.let {
+                        mAdapter.setData(it)
+                    }
+                }
+                is NetworkResult.Error -> {
+                    hideShimmerEffect()
+                    loadDataFromCache()
+                    Toast.makeText(
+                        context,
+                        response.message,
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+                is NetworkResult.Loading -> {
+                    showShimmerEffect()
+                }
+            }
+        }
+    }
+
+    private fun searchApiData(searchQuery: String) {
+        showShimmerEffect()
+        mainViewModel.searchRecipes(recipesViewModel.applySearchQuery(searchQuery))
+        mainViewModel.searchedRecipesResponse.observe(viewLifecycleOwner) { response ->
             when (response) {
                 is NetworkResult.Success -> {
                     hideShimmerEffect()
