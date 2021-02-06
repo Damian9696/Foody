@@ -1,15 +1,38 @@
 package com.example.foody.binding_adapters
 
+import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.databinding.BindingAdapter
+import androidx.navigation.findNavController
 import coil.load
 import com.example.foody.R
+import com.example.foody.models.Result
+import com.example.foody.ui.fragments.recipes.RecipesFragmentDirections
 
 class RecipesRowBinding {
     companion object {
+
+        @BindingAdapter("onRecipesClickListener")
+        @JvmStatic
+        fun ConstraintLayout.onRecipesClickListener(result: Result) {
+            this.setOnClickListener {
+                try {
+                    val action = RecipesFragmentDirections.actionRecipesFragmentToDetailsActivity(
+                        result
+                    )
+                    this.findNavController().navigate(action)
+                } catch (exception: Exception) {
+                    Log.d(
+                        "RecipesRowBinding",
+                        "onRecipesClickListener: ${exception.message}"
+                    )
+                }
+            }
+        }
 
         @BindingAdapter("setNumberOfLikes")
         @JvmStatic
