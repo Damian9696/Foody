@@ -22,4 +22,7 @@
     <color name="checkedTextChipColor">@color/colorPrimary</color>
     <color name="uncheckedTextChipColor">@color/darkGray</color>
 
+    //ActionBar
+    <color name="actionbarBackgroundColor">@color/colorPrimary</color>
+
 </resources>
