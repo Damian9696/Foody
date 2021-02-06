@@ -5,11 +5,18 @@ import android.os.Bundle
 import android.view.MenuItem
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
+import androidx.navigation.navArgs
 import com.example.foody.R
+import com.example.foody.adapters.PagerAdapter
 import com.example.foody.databinding.ActivityDetailsBinding
+import com.example.foody.ui.fragments.ingredients.IngredientsFragment
+import com.example.foody.ui.fragments.instructions.InstructionsFragment
+import com.example.foody.ui.fragments.overview.OverviewFragment
 
 class DetailsActivity : AppCompatActivity() {
 
+    private val args by navArgs<DetailsActivityArgs>()
     private lateinit var binding: ActivityDetailsBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -23,6 +30,29 @@ class DetailsActivity : AppCompatActivity() {
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
+        val fragments = ArrayList<Fragment>()
+        fragments.add(OverviewFragment())
+        fragments.add(IngredientsFragment())
+        fragments.add(InstructionsFragment())
+
+        val titles = ArrayList<String>()
+        titles.add("Overview")
+        titles.add("Ingredients")
+        titles.add("Instructions")
+
+        val resultBundle = Bundle()
+        resultBundle.putParcelable("resultBundle", args.result)
+
+        val adapter = PagerAdapter(
+            resultBundle,
+            fragments,
+            titles,
+            supportFragmentManager
+        )
+
+        val viewPager = binding.viewPager
+        viewPager.adapter = adapter
+        binding.tabLayout.setupWithViewPager(viewPager)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
