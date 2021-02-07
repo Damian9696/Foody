@@ -11,6 +11,7 @@ import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import coil.load
 import com.example.foody.R
+import com.example.foody.binding_adapters.RecipesRowBinding.Companion.parseHtml
 import com.example.foody.databinding.FragmentOverviewBinding
 import com.example.foody.models.Result
 
@@ -32,7 +33,7 @@ class OverviewFragment : Fragment() {
         binding.titleTextView.text = bundle?.title
         binding.likesTextView.text = bundle?.aggregateLikes.toString()
         binding.timeTextView.text = bundle?.readyInMinutes.toString()
-        binding.summaryTextView.text = bundle?.summary
+        binding.summaryTextView.parseHtml(bundle?.summary)
 
         context?.let { notNullContext ->
             if (bundle?.vegetarian == true) {
