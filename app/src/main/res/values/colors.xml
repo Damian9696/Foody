@@ -25,4 +25,9 @@
     //ActionBar
     <color name="actionbarBackgroundColor">@color/colorPrimary</color>
 
+    //Ingredients row layout
+    <color name="strokeColor">@color/lightMediumGray</color>
+    <color name="cardBackground">@color/white</color>
+    <color name="titleColor">@color/darker</color>
+
 </resources>
