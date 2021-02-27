@@ -1,8 +1,6 @@
 package com.example.foody.ui.fragments.overview
 
 import android.os.Bundle
-import android.text.Html
-import android.text.method.LinkMovementMethod
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -14,6 +12,7 @@ import com.example.foody.R
 import com.example.foody.binding_adapters.RecipesRowBinding.Companion.parseHtml
 import com.example.foody.databinding.FragmentOverviewBinding
 import com.example.foody.models.Result
+import com.example.foody.util.Constants.Companion.RECIPE_RESULT_KEY
 
 class OverviewFragment : Fragment() {
 
@@ -27,7 +26,7 @@ class OverviewFragment : Fragment() {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_overview, container, false)
 
         val args = arguments
-        val bundle: Result? = args?.getParcelable("resultBundle")
+        val bundle: Result? = args?.getParcelable(RECIPE_RESULT_KEY)
 
         binding.mainImageView.load(bundle?.image)
         binding.titleTextView.text = bundle?.title

@@ -61,7 +61,7 @@
 
                 <ImageView
                     android:id="@+id/ingredient_imageView"
-                    setIngredientImage="@{ingredients}"
+                    setIngredientImage="@{extendedIngredient}"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     app:layout_constraintBottom_toBottomOf="@id/white_background"

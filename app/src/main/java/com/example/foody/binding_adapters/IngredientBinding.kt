@@ -4,6 +4,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import coil.load
+import com.example.foody.R
 import com.example.foody.models.ExtendedIngredient
 import com.example.foody.util.Constants.Companion.BASE_IMAGE_URL
 import java.util.*
@@ -15,7 +16,10 @@ class IngredientBinding {
         @BindingAdapter("setIngredientImage")
         fun ImageView.setIngredientImage(extendedIngredient: ExtendedIngredient?) {
             extendedIngredient?.let { notNullExtendedIngredient ->
-                this.load(BASE_IMAGE_URL + notNullExtendedIngredient.image)
+                this.load(BASE_IMAGE_URL + notNullExtendedIngredient.image) {
+                    crossfade(600)
+                    error(R.drawable.ic_placeholder_error)
+                }
             }
         }
 
