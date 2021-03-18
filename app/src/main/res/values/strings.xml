@@ -22,5 +22,10 @@
     <string name="dairy_free">Dairy Free</string>
     <string name="vegan">Vegan</string>
     <string name="vegetarian">Vegetarian</string>
-    <string name="add_to_favourites">Add to favourites</string>
+    <string name="save_to_favourites">Save to favourites</string>
+    <string name="recipe_saved_as_favourite">Recipe saved as favourite.</string>
+    <string name="overview">Overview</string>
+    <string name="ingredients">Ingredients</string>
+    <string name="instructions">Instructions</string>
+    <string name="okey">Okey</string>
 </resources>
