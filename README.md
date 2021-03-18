@@ -1,4 +1,4 @@
-# DiceRoller
+# Foody
 > Application built in Kotlin, with the latest components and libraries like Dagger-Hilt, Data Store, Navigation Components, Room etc.
 
 ## Table of contents
