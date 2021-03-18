@@ -1,5 +1,6 @@
 # Foody
 > Application built in Kotlin, with the latest components and libraries like Dagger-Hilt, Data Store, Navigation Components, Room etc.
+> You can follow my progress on Trello: https://trello.com/b/It7BVmpg/foody
 
 ## Table of contents
 * [General info](#general-info)
