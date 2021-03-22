@@ -66,7 +66,24 @@ class DetailsActivity : AppCompatActivity() {
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.details_menu, menu)
+        val saveToFavouritesItem = menu?.findItem(R.id.save_to_favourites)
+        changeMenuItemColorIfRecipeIsSaved(saveToFavouritesItem)
         return true
+    }
+
+    private fun changeMenuItemColorIfRecipeIsSaved(saveToFavouritesItem: MenuItem?) {
+        mainViewModel.readFavoriteRecipes.observe(this) { nullableListOfFavourites ->
+            nullableListOfFavourites?.let { notNullListOfFavourites ->
+                for (savedRecipes in notNullListOfFavourites) {
+                    if (savedRecipes.result.id == args.result.id) {
+                        saveToFavouritesItem?.let { notNullItem ->
+                            changeMenuItemColor(notNullItem, R.color.yellow)
+                        }
+                        break
+                    }
+                }
+            }
+        }
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
