@@ -28,6 +28,9 @@ class DetailsActivity : AppCompatActivity() {
     private lateinit var binding: ActivityDetailsBinding
     private val mainViewModel: MainViewModel by viewModels()
 
+    private var isRecipesSaved = false
+    private var savedRecipeId = 0
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -79,6 +82,7 @@ class DetailsActivity : AppCompatActivity() {
                         saveToFavouritesItem?.let { notNullItem ->
                             changeMenuItemColor(notNullItem, R.color.yellow)
                         }
+                        isRecipesSaved = true
                         break
                     }
                 }
@@ -89,8 +93,10 @@ class DetailsActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == android.R.id.home) {
             finish()
-        } else if (item.itemId == R.id.save_to_favourites) {
+        } else if (item.itemId == R.id.save_to_favourites && !isRecipesSaved) {
             saveToFavourites(item)
+        } else if (item.itemId == R.id.save_to_favourites && isRecipesSaved) {
+            removeFromFavourites(item)
         }
         return super.onOptionsItemSelected(item)
     }
@@ -101,8 +107,21 @@ class DetailsActivity : AppCompatActivity() {
                 result = args.result
             )
         mainViewModel.insertFavoriteRecipe(favouritesEntity)
+        isRecipesSaved = true
         changeMenuItemColor(item, R.color.yellow)
         showSnackBar(getString(R.string.recipe_saved_as_favourite))
+    }
+
+    private fun removeFromFavourites(item: MenuItem) {
+        val favouritesEntity =
+            FavoritesEntity(
+                id = savedRecipeId,
+                result = args.result
+            )
+        mainViewModel.deleteFavoriteRecipe(favouritesEntity)
+        isRecipesSaved = false
+        changeMenuItemColor(item, R.color.white)
+        showSnackBar(getString(R.string.recipes_removed_from_favourites))
     }
 
     private fun showSnackBar(message: String) {
