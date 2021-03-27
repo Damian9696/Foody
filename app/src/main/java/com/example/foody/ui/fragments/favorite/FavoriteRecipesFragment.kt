@@ -28,21 +28,17 @@ class FavoriteRecipesFragment : Fragment() {
         // Inflate the layout for this fragment
         binding =
             DataBindingUtil.inflate(inflater, R.layout.fragment_favorite_recipes, container, false)
+        binding.lifecycleOwner = this
+        binding.mainViewModel = mainViewModel
+        binding.favoriteRecipesAdapter = favoriteRecipesAdapter
 
         val recyclerView = binding.favouritesRecyclerView
         setupRecyclerView(recyclerView)
-
-        mainViewModel.readFavoriteRecipes.observe(viewLifecycleOwner) {
-            it?.let { favoriteRecipes ->
-                favoriteRecipesAdapter.setData(favoriteRecipes)
-            }
-        }
 
         return binding.root
     }
 
     private fun setupRecyclerView(recyclerView: RecyclerView) {
         recyclerView.adapter = favoriteRecipesAdapter
-
     }
 }

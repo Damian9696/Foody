@@ -5,6 +5,13 @@
 
     <data>
 
+        <variable
+            name="mainViewModel"
+            type="com.example.foody.view_models.MainViewModel" />
+
+        <variable
+            name="favoriteRecipesAdapter"
+            type="com.example.foody.adapters.FavoriteRecipesAdapter" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -15,6 +22,8 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/favourites_recyclerView"
+            setData="@{favoriteRecipesAdapter}"
+            viewVisibility="@{mainViewModel.readFavoriteRecipes}"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginStart="8dp"
@@ -29,28 +38,30 @@
 
         <ImageView
             android:id="@+id/no_data_imageView"
+            viewVisibility="@{mainViewModel.readFavoriteRecipes}"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:alpha="0.5"
             android:src="@drawable/ic_menu_book"
+            android:visibility="invisible"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.40"
-            android:visibility="invisible" />
+            app:layout_constraintVertical_bias="0.40" />
 
         <TextView
             android:id="@+id/textView"
+            viewVisibility="@{mainViewModel.readFavoriteRecipes}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:alpha="0.5"
             android:text="@string/no_favourite_recipes"
+            android:visibility="invisible"
             app:layout_constraintEnd_toEndOf="@+id/no_data_imageView"
             app:layout_constraintStart_toStartOf="@+id/no_data_imageView"
-            app:layout_constraintTop_toBottomOf="@+id/no_data_imageView"
-            android:visibility="invisible" />
+            app:layout_constraintTop_toBottomOf="@+id/no_data_imageView" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
