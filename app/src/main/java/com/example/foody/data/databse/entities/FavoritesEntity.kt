@@ -8,6 +8,6 @@ import com.example.foody.util.Constants.Companion.FAVORITE_RECIPES_TABLE
 @Entity(tableName = FAVORITE_RECIPES_TABLE)
 data class FavoritesEntity(
     @PrimaryKey(autoGenerate = true)
-    var id: Int = 0,
+    var id: Int,
     var result: Result
 )
