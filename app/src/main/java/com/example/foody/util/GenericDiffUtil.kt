@@ -3,7 +3,7 @@ package com.example.foody.util
 import androidx.recyclerview.widget.DiffUtil
 import com.example.foody.models.Result
 
-class RecipesDiffUtil<T>(
+class GenericDiffUtil<T>(
     private val oldList: List<T>,
     private val newList: List<T>
 ) : DiffUtil.Callback() {
