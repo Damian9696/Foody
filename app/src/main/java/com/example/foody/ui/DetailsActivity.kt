@@ -83,6 +83,7 @@ class DetailsActivity : AppCompatActivity() {
                             changeMenuItemColor(notNullItem, R.color.yellow)
                         }
                         isRecipesSaved = true
+                        savedRecipeId = savedRecipes.id
                         break
                     }
                 }
@@ -104,6 +105,7 @@ class DetailsActivity : AppCompatActivity() {
     private fun saveToFavourites(item: MenuItem) {
         val favouritesEntity =
             FavoritesEntity(
+                id = 0,
                 result = args.result
             )
         mainViewModel.insertFavoriteRecipe(favouritesEntity)
