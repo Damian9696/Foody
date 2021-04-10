@@ -11,10 +11,20 @@
         <variable
             name="clickListener"
             type="com.example.foody.adapters.FavoriteRecipesListener" />
+
+        <variable
+            name="actionModeCallback"
+            type="android.view.ActionMode.Callback" />
+
+        <variable
+            name="activity"
+            type="androidx.fragment.app.FragmentActivity" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/favorite_recipes_row"
+        actionModeCallback="@{actionModeCallback}"
+        activity="@{activity}"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"

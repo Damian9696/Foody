@@ -1,9 +1,12 @@
 package com.example.foody.binding_adapters
 
+import android.view.ActionMode
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.databinding.BindingAdapter
+import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.example.foody.adapters.FavoriteRecipesAdapter
 import com.example.foody.data.databse.entities.FavoritesEntity
@@ -43,6 +46,18 @@ class FavoriteRecipesBinding {
                         favoriteRecipesAdapter?.setData(favoriteRecipes)
                     }
                 }
+            }
+        }
+
+        @BindingAdapter("actionModeCallback", "activity", requireAll = true)
+        @JvmStatic
+        fun ConstraintLayout.setLongClickListener(
+            actionModeCallback: ActionMode.Callback,
+            fragmentActivity: FragmentActivity
+        ) {
+            this.setOnLongClickListener {
+                fragmentActivity.startActionMode(actionModeCallback)
+                true
             }
         }
     }
