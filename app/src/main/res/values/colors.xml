@@ -30,4 +30,9 @@
     <color name="cardBackground">@color/white</color>
     <color name="titleColor">@color/darker</color>
 
+    //Status bar
+    <color name="statusBarColor">@color/colorPrimaryDark</color>
+    <color name="contextualStatusBarColor">@color/darker</color>
+    <color name="contextualActionBarColor">@color/dark</color>
+
 </resources>
