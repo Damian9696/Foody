@@ -1,6 +1,7 @@
 package com.example.foody.adapters
 
 import android.view.*
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -70,6 +71,7 @@ class FavoriteRecipesAdapter(
 
     override fun onCreateActionMode(mode: ActionMode?, menu: Menu?): Boolean {
         mode?.menuInflater?.inflate(R.menu.favorites_contextual_menu, menu)
+        changeStatusBarColor(R.color.contextualStatusBarColor)
         return true
     }
 
@@ -82,6 +84,11 @@ class FavoriteRecipesAdapter(
     }
 
     override fun onDestroyActionMode(mode: ActionMode?) {
+        changeStatusBarColor(R.color.statusBarColor)
+    }
+
+    private fun changeStatusBarColor(color: Int) {
+        activity.window.statusBarColor = ContextCompat.getColor(activity, color)
     }
 }
 
