@@ -7,14 +7,19 @@
         <variable
             name="favoritesEntity"
             type="com.example.foody.data.databse.entities.FavoritesEntity" />
+
+        <variable
+            name="clickListener"
+            type="com.example.foody.adapters.FavoriteRecipesListener" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/root_recipes_row"
+        android:id="@+id/favorite_recipes_row"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
-        android:layout_marginBottom="4dp">
+        android:layout_marginBottom="4dp"
+        android:onClick="@{() -> clickListener.onClick(favoritesEntity)}">
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/favourite_card_view_recipes_row"

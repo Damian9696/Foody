@@ -50,3 +50,4 @@ class IngredientsAdapter : RecyclerView.Adapter<IngredientsAdapter.MyViewHolder>
         diffUtilResult.dispatchUpdatesTo(this)
     }
 }
+
