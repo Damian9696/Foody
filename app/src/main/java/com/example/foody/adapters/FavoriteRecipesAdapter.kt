@@ -8,7 +8,7 @@ import com.example.foody.data.databse.entities.FavoritesEntity
 import com.example.foody.databinding.FavoriteRecipesRowLayoutBinding
 import com.example.foody.util.GenericDiffUtil
 
-class FavoriteRecipesAdapter :
+class FavoriteRecipesAdapter(private val favoriteRecipesListener: FavoriteRecipesListener) :
     RecyclerView.Adapter<FavoriteRecipesAdapter.FavoritesRecipesViewHolder>() {
 
     private var favoriteRecipes = emptyList<FavoritesEntity>()
@@ -16,8 +16,9 @@ class FavoriteRecipesAdapter :
     class FavoritesRecipesViewHolder(private val binding: FavoriteRecipesRowLayoutBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(favoritesEntity: FavoritesEntity) {
+        fun bind(favoritesEntity: FavoritesEntity, favoriteRecipesListener: FavoriteRecipesListener) {
             binding.favoritesEntity = favoritesEntity
+            binding.clickListener = favoriteRecipesListener
             binding.executePendingBindings()
         }
 
@@ -37,7 +38,7 @@ class FavoriteRecipesAdapter :
 
     override fun onBindViewHolder(holder: FavoritesRecipesViewHolder, position: Int) {
         val item = favoriteRecipes[position]
-        holder.bind(item)
+        holder.bind(item, favoriteRecipesListener)
     }
 
     override fun getItemCount(): Int {
@@ -50,5 +51,8 @@ class FavoriteRecipesAdapter :
         favoriteRecipes = newFavoriteRecipes
         diffUtilResult.dispatchUpdatesTo(this)
     }
+}
 
+class FavoriteRecipesListener(val clickListener: (favoritesEntity: FavoritesEntity) -> Unit) {
+    fun onClick(favoritesEntity: FavoritesEntity) = clickListener(favoritesEntity)
 }
