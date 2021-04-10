@@ -28,7 +28,8 @@ class FavoriteRecipesFragment : Fragment() {
                         it.result
                     )
                 )
-            })
+            }, requireActivity()
+        )
     }
     private val mainViewModel: MainViewModel by viewModels()
 

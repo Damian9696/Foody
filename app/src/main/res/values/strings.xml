@@ -30,4 +30,5 @@
     <string name="okey">Okey</string>
     <string name="recipes_removed_from_favourites">Recipe removed from favourite.</string>
     <string name="no_favourite_recipes">No favourite recipes.</string>
+    <string name="delete">delete</string>
 </resources>
