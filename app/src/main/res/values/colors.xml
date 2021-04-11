@@ -28,6 +28,7 @@
     //Ingredients row layout
     <color name="strokeColor">@color/lightMediumGray</color>
     <color name="cardBackground">@color/white</color>
+    <color name="cardBackgroundLightColor">#106200EA</color>
     <color name="titleColor">@color/darker</color>
 
     //Status bar

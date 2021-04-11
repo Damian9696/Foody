@@ -48,17 +48,5 @@ class FavoriteRecipesBinding {
                 }
             }
         }
-
-        @BindingAdapter("actionModeCallback", "activity", requireAll = true)
-        @JvmStatic
-        fun ConstraintLayout.setLongClickListener(
-            actionModeCallback: ActionMode.Callback,
-            fragmentActivity: FragmentActivity
-        ) {
-            this.setOnLongClickListener {
-                fragmentActivity.startActionMode(actionModeCallback)
-                true
-            }
-        }
     }
 }

@@ -7,29 +7,14 @@
         <variable
             name="favoritesEntity"
             type="com.example.foody.data.databse.entities.FavoritesEntity" />
-
-        <variable
-            name="clickListener"
-            type="com.example.foody.adapters.FavoriteRecipesListener" />
-
-        <variable
-            name="actionModeCallback"
-            type="android.view.ActionMode.Callback" />
-
-        <variable
-            name="activity"
-            type="androidx.fragment.app.FragmentActivity" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/favorite_recipes_row"
-        actionModeCallback="@{actionModeCallback}"
-        activity="@{activity}"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
-        android:layout_marginBottom="4dp"
-        android:onClick="@{() -> clickListener.onClick(favoritesEntity)}">
+        android:layout_marginBottom="4dp">
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/favourite_card_view_recipes_row"
@@ -44,6 +29,7 @@
             app:strokeWidth="1dp">
 
             <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/background_favorite_recipes"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@color/white">

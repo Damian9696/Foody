@@ -7,11 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.foody.R
 import com.example.foody.adapters.FavoriteRecipesAdapter
-import com.example.foody.adapters.FavoriteRecipesListener
 import com.example.foody.databinding.FragmentFavoriteRecipesBinding
 import com.example.foody.view_models.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -21,15 +19,7 @@ class FavoriteRecipesFragment : Fragment() {
 
     private lateinit var binding: FragmentFavoriteRecipesBinding
     private val favoriteRecipesAdapter: FavoriteRecipesAdapter by lazy {
-        FavoriteRecipesAdapter(
-            FavoriteRecipesListener {
-                findNavController().navigate(
-                    FavoriteRecipesFragmentDirections.actionFavoriteRecipesFragmentToDetailsActivity(
-                        it.result
-                    )
-                )
-            }, requireActivity()
-        )
+        FavoriteRecipesAdapter(requireActivity())
     }
     private val mainViewModel: MainViewModel by viewModels()
 

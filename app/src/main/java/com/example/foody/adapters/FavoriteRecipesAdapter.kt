@@ -3,59 +3,129 @@ package com.example.foody.adapters
 import android.view.*
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.FragmentActivity
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.foody.R
 import com.example.foody.data.databse.entities.FavoritesEntity
 import com.example.foody.databinding.FavoriteRecipesRowLayoutBinding
+import com.example.foody.ui.fragments.favorite.FavoriteRecipesFragmentDirections
 import com.example.foody.util.GenericDiffUtil
 
 class FavoriteRecipesAdapter(
-    private val favoriteRecipesListener: FavoriteRecipesListener,
     private val activity: FragmentActivity
 ) :
     RecyclerView.Adapter<FavoriteRecipesAdapter.FavoritesRecipesViewHolder>(), ActionMode.Callback {
 
     private var favoriteRecipes = emptyList<FavoritesEntity>()
+    private var multiSelection = false
+    private var selectedRecipes = arrayListOf<FavoritesEntity>()
+    private var favoritesRecipesViewHolders = arrayListOf<FavoritesRecipesViewHolder>()
 
     class FavoritesRecipesViewHolder(
-        private val binding: FavoriteRecipesRowLayoutBinding,
-        private val actionModeCallback: ActionMode.Callback
+        val binding: FavoriteRecipesRowLayoutBinding
     ) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(
-            favoritesEntity: FavoritesEntity,
-            favoriteRecipesListener: FavoriteRecipesListener,
-            activity: FragmentActivity
+            favoritesEntity: FavoritesEntity
         ) {
             binding.favoritesEntity = favoritesEntity
-            binding.clickListener = favoriteRecipesListener
-            binding.actionModeCallback = actionModeCallback
-            binding.activity = activity
             binding.executePendingBindings()
         }
 
         companion object {
             fun from(
-                viewGroup: ViewGroup,
-                actionModeCallback: ActionMode.Callback
+                viewGroup: ViewGroup
             ): FavoritesRecipesViewHolder {
                 val layoutInflater = LayoutInflater.from(viewGroup.context)
                 val binding =
                     FavoriteRecipesRowLayoutBinding.inflate(layoutInflater, viewGroup, false)
-                return FavoritesRecipesViewHolder(binding, actionModeCallback)
+                return FavoritesRecipesViewHolder(binding)
             }
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FavoritesRecipesViewHolder {
-        return FavoritesRecipesViewHolder.from(parent, this)
+        return FavoritesRecipesViewHolder.from(parent)
     }
 
     override fun onBindViewHolder(holder: FavoritesRecipesViewHolder, position: Int) {
         val item = favoriteRecipes[position]
-        holder.bind(item, favoriteRecipesListener, activity)
+        holder.bind(item)
+
+        onClick(holder, item)
+        onLongClick(holder, item)
+    }
+
+    private fun applySelection(holder: FavoritesRecipesViewHolder, currentRecipe: FavoritesEntity) {
+        if (selectedRecipes.contains(currentRecipe)) {
+            selectedRecipes.remove(currentRecipe)
+            changeRecipeStyle(holder, R.color.cardBackground, R.color.strokeColor)
+        } else {
+            selectedRecipes.add(currentRecipe)
+            changeRecipeStyle(holder, R.color.cardBackgroundLightColor, R.color.colorPrimaryDark)
+        }
+    }
+
+    private fun changeRecipeStyle(
+        holder: FavoritesRecipesViewHolder,
+        backgroundColor: Int,
+        strokeColor: Int
+    ) {
+        holder.binding.backgroundFavoriteRecipes.setBackgroundColor(
+            ContextCompat.getColor(activity, backgroundColor)
+        )
+        holder.binding.favouriteCardViewRecipesRow.strokeColor =
+            ContextCompat.getColor(activity, strokeColor)
+    }
+
+    private fun onLongClick(holder: FavoritesRecipesViewHolder, item: FavoritesEntity) {
+        holder.binding.favoriteRecipesRow.setOnLongClickListener {
+            if (!multiSelection) {
+                multiSelection = true
+                activity.startActionMode(this)
+                applySelection(holder, item)
+                applySelectedViewHolders(holder)
+                true
+            } else {
+                multiSelection = false
+                false
+            }
+        }
+    }
+
+    private fun onClick(
+        holder: FavoritesRecipesViewHolder,
+        item: FavoritesEntity
+    ) {
+        holder.binding.favoriteRecipesRow.setOnClickListener {
+            if (multiSelection) {
+                applySelection(holder, item)
+                applySelectedViewHolders(holder)
+            } else {
+                navigateToRecipe(holder, item)
+            }
+        }
+    }
+
+    private fun applySelectedViewHolders(holder: FavoritesRecipesViewHolder) {
+        if (favoritesRecipesViewHolders.contains(holder)) {
+            favoritesRecipesViewHolders.remove(holder)
+        } else {
+            favoritesRecipesViewHolders.add(holder)
+        }
+    }
+
+    private fun navigateToRecipe(
+        holder: FavoritesRecipesViewHolder,
+        item: FavoritesEntity
+    ) {
+        holder.itemView.findNavController().navigate(
+            FavoriteRecipesFragmentDirections.actionFavoriteRecipesFragmentToDetailsActivity(
+                item.result
+            )
+        )
     }
 
     override fun getItemCount(): Int {
@@ -84,14 +154,16 @@ class FavoriteRecipesAdapter(
     }
 
     override fun onDestroyActionMode(mode: ActionMode?) {
+        favoritesRecipesViewHolders.forEach { holder ->
+            changeRecipeStyle(holder, R.color.cardBackground, R.color.strokeColor)
+        }
+        favoritesRecipesViewHolders.clear()
+        multiSelection = false
+        selectedRecipes.clear()
         changeStatusBarColor(R.color.statusBarColor)
     }
 
     private fun changeStatusBarColor(color: Int) {
         activity.window.statusBarColor = ContextCompat.getColor(activity, color)
     }
-}
-
-class FavoriteRecipesListener(val clickListener: (favoritesEntity: FavoritesEntity) -> Unit) {
-    fun onClick(favoritesEntity: FavoritesEntity) = clickListener(favoritesEntity)
 }
