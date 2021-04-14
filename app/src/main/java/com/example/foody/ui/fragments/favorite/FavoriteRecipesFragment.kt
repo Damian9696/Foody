@@ -18,10 +18,10 @@ import dagger.hilt.android.AndroidEntryPoint
 class FavoriteRecipesFragment : Fragment() {
 
     private lateinit var binding: FragmentFavoriteRecipesBinding
-    private val favoriteRecipesAdapter: FavoriteRecipesAdapter by lazy {
-        FavoriteRecipesAdapter(requireActivity())
-    }
     private val mainViewModel: MainViewModel by viewModels()
+    private val favoriteRecipesAdapter: FavoriteRecipesAdapter by lazy {
+        FavoriteRecipesAdapter(requireActivity(), mainViewModel)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
