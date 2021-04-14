@@ -21,6 +21,7 @@ class FavoriteRecipesAdapter(
     private var multiSelection = false
     private var selectedRecipes = arrayListOf<FavoritesEntity>()
     private var favoritesRecipesViewHolders = arrayListOf<FavoritesRecipesViewHolder>()
+    private lateinit var actionMode: ActionMode
 
     class FavoritesRecipesViewHolder(
         val binding: FavoriteRecipesRowLayoutBinding
@@ -66,6 +67,7 @@ class FavoriteRecipesAdapter(
             selectedRecipes.add(currentRecipe)
             changeRecipeStyle(holder, R.color.cardBackgroundLightColor, R.color.colorPrimaryDark)
         }
+        applyActionModeTitle()
     }
 
     private fun changeRecipeStyle(
@@ -139,8 +141,17 @@ class FavoriteRecipesAdapter(
         diffUtilResult.dispatchUpdatesTo(this)
     }
 
+    private fun applyActionModeTitle() {
+        when (selectedRecipes.size) {
+            0 -> actionMode.finish()
+            1 -> actionMode.title = "${selectedRecipes.size} item selected"
+            else -> actionMode.title = "${selectedRecipes.size} items selected"
+        }
+    }
+
     override fun onCreateActionMode(mode: ActionMode?, menu: Menu?): Boolean {
         mode?.menuInflater?.inflate(R.menu.favorites_contextual_menu, menu)
+        actionMode = mode!!
         changeStatusBarColor(R.color.contextualStatusBarColor)
         return true
     }
