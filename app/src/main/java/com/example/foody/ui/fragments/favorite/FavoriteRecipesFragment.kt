@@ -43,4 +43,9 @@ class FavoriteRecipesFragment : Fragment() {
     private fun setupRecyclerView(recyclerView: RecyclerView) {
         recyclerView.adapter = favoriteRecipesAdapter
     }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        favoriteRecipesAdapter.finishContextualActionMode()
+    }
 }
