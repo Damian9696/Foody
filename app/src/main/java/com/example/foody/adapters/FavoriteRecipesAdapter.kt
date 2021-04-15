@@ -11,6 +11,7 @@ import com.example.foody.data.databse.entities.FavoritesEntity
 import com.example.foody.databinding.FavoriteRecipesRowLayoutBinding
 import com.example.foody.ui.fragments.favorite.FavoriteRecipesFragmentDirections
 import com.example.foody.util.GenericDiffUtil
+import com.example.foody.util.SnackBarUtil.Companion.showSnackBarWithMessage
 import com.example.foody.view_models.MainViewModel
 import com.google.android.material.snackbar.Snackbar
 
@@ -173,9 +174,24 @@ class FavoriteRecipesAdapter(
         if (item?.itemId == R.id.delete_favorite_recipe) {
 
             when (selectedRecipes.size) {
-                0 -> showSnackBarItemsDeleted("At least one item must be selected!")
-                1 -> showSnackBarItemsDeleted("${selectedRecipes.size} recipe removed!")
-                else -> showSnackBarItemsDeleted("${selectedRecipes.size} recipes removed!")
+                0 -> showSnackBarWithMessage(
+                    rootView,
+                    activity.getString(R.string.at_least_one_item_must_be_selected)
+                )
+                1 -> showSnackBarWithMessage(
+                    rootView,
+                    String.format(
+                        activity.getString(R.string.recipe_removed),
+                        selectedRecipes.size
+                    )
+                )
+                else -> showSnackBarWithMessage(
+                    rootView,
+                    String.format(
+                        activity.getString(R.string.recipes_removed),
+                        selectedRecipes.size
+                    )
+                )
             }
 
             selectedRecipes.forEach {
@@ -197,14 +213,6 @@ class FavoriteRecipesAdapter(
         multiSelection = false
         selectedRecipes.clear()
         changeStatusBarColor(R.color.statusBarColor)
-    }
-
-    private fun showSnackBarItemsDeleted(message: String) {
-        Snackbar.make(
-            rootView,
-            message,
-            Snackbar.LENGTH_SHORT
-        ).setAction("Okey") {}.show()
     }
 
     private fun changeStatusBarColor(color: Int) {

@@ -1,16 +1,15 @@
 package com.example.foody.ui.fragments.favorite
 
 import android.os.Bundle
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.RecyclerView
 import com.example.foody.R
 import com.example.foody.adapters.FavoriteRecipesAdapter
 import com.example.foody.databinding.FragmentFavoriteRecipesBinding
+import com.example.foody.util.SnackBarUtil.Companion.showSnackBarWithMessage
 import com.example.foody.view_models.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -37,6 +36,8 @@ class FavoriteRecipesFragment : Fragment() {
         val recyclerView = binding.favouritesRecyclerView
         setupRecyclerView(recyclerView)
 
+        setHasOptionsMenu(true)
+
         return binding.root
     }
 
@@ -47,5 +48,20 @@ class FavoriteRecipesFragment : Fragment() {
     override fun onDestroy() {
         super.onDestroy()
         favoriteRecipesAdapter.finishContextualActionMode()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.favorite_recipes_menu, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == R.id.delete_all_recipes) {
+            mainViewModel.deleteAllFavoriteRecipes()
+            showSnackBarWithMessage(
+                requireView(),
+                getString(R.string.all_favorite_recipes_have_been_removed)
+            )
+        }
+        return super.onOptionsItemSelected(item)
     }
 }

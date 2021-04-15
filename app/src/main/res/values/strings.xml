@@ -24,6 +24,8 @@
     <string name="vegetarian">Vegetarian</string>
     <string name="save_to_favourites">Save to favourites</string>
     <string name="recipe_saved_as_favourite">Recipe saved as favourite.</string>
+    <string name="recipe_removed">%1$d recipe removed!</string>
+    <string name="recipes_removed">%1$d recipes removed!</string>
     <string name="overview">Overview</string>
     <string name="ingredients">Ingredients</string>
     <string name="instructions">Instructions</string>
@@ -31,4 +33,7 @@
     <string name="recipes_removed_from_favourites">Recipe removed from favourite.</string>
     <string name="no_favourite_recipes">No favourite recipes.</string>
     <string name="delete">delete</string>
+    <string name="delete_all">Delete all</string>
+    <string name="at_least_one_item_must_be_selected">At least one item must be selected!</string>
+    <string name="all_favorite_recipes_have_been_removed">All favorite recipes have been removed!</string>
 </resources>
