@@ -210,4 +210,10 @@ class FavoriteRecipesAdapter(
     private fun changeStatusBarColor(color: Int) {
         activity.window.statusBarColor = ContextCompat.getColor(activity, color)
     }
+
+    fun finishContextualActionMode() {
+        if (this::actionMode.isInitialized) {
+            actionMode.finish()
+        }
+    }
 }
