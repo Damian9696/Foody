@@ -13,7 +13,6 @@ import com.example.foody.ui.fragments.favorite.FavoriteRecipesFragmentDirections
 import com.example.foody.util.GenericDiffUtil
 import com.example.foody.util.SnackBarUtil.Companion.showSnackBarWithMessage
 import com.example.foody.view_models.MainViewModel
-import com.google.android.material.snackbar.Snackbar
 
 class FavoriteRecipesAdapter(
     private val activity: FragmentActivity,
@@ -72,7 +71,7 @@ class FavoriteRecipesAdapter(
     private fun applySelection(holder: FavoritesRecipesViewHolder, currentRecipe: FavoritesEntity) {
         if (selectedRecipes.contains(currentRecipe)) {
             selectedRecipes.remove(currentRecipe)
-            changeRecipeStyle(holder, R.color.cardBackground, R.color.strokeColor)
+            changeRecipeStyle(holder, R.color.cardBackgroundColor, R.color.strokeColor)
         } else {
             selectedRecipes.add(currentRecipe)
             changeRecipeStyle(holder, R.color.cardBackgroundLightColor, R.color.colorPrimaryDark)
@@ -207,7 +206,7 @@ class FavoriteRecipesAdapter(
 
     override fun onDestroyActionMode(mode: ActionMode?) {
         favoritesRecipesViewHolders.forEach { holder ->
-            changeRecipeStyle(holder, R.color.cardBackground, R.color.strokeColor)
+            changeRecipeStyle(holder, R.color.cardBackgroundColor, R.color.strokeColor)
         }
         favoritesRecipesViewHolders.clear()
         multiSelection = false

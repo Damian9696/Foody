@@ -16,10 +16,10 @@
     <color name="yellow">#FFC114</color>
     <color name="green">#00C980</color>
 
-    <!-- LIGHT THEME -->
+    <!-- DARK THEME -->
 
-    //Background
-    <color name="backgroundColor">@color/lightGray</color>
+    //Fragment Background
+    <color name="backgroundColor">@color/dark</color>
 
     //Chip style
     <color name="checkedChipBackgroundColor">#206200EA</color>
@@ -28,23 +28,23 @@
     <color name="uncheckedTextChipColor">@color/darkGray</color>
 
     //ActionBar
-    <color name="actionbarBackgroundColor">@color/colorPrimary</color>
+    <color name="actionbarBackgroundColor">@color/darker</color>
 
     //Ingredients row layout
-    <color name="strokeColor">@color/lightMediumGray</color>
-    <color name="cardBackgroundColor">@color/white</color>
+    <color name="strokeColor">@color/mediumGray</color>
+    <color name="cardBackgroundColor">@color/darker</color>
     <color name="cardBackgroundLightColor">#106200EA</color>
-    <color name="titleColor">@color/darker</color>
-    <color name="descriptionColor">@color/darkGray</color>
+    <color name="titleColor">@color/mediumGray</color>
+    <color name="descriptionColor">@color/mediumGray</color>
 
     //Status bar
-    <color name="statusBarColor">@color/colorPrimaryDark</color>
+    <color name="statusBarColor">@color/black</color>
     <color name="contextualStatusBarColor">@color/darker</color>
     <color name="contextualActionBarColor">@color/dark</color>
 
     //Bottom Navigation
-    <color name="bottomNavBackgroundColor">@color/white</color>
-    <color name="bottomNavItemIconColor">@color/darkGray</color>
-    <color name="bottomNavCheckedItemColor">@color/colorPrimary</color>
+    <color name="bottomNavBackgroundColor">@color/darker</color>
+    <color name="bottomNavItemIconColor">@color/mediumGray</color>
+    <color name="bottomNavCheckedItemColor">@color/colorAccent</color>
 
 </resources>
