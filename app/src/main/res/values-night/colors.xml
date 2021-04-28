@@ -33,6 +33,9 @@
     //Shimmer
     <color name="placeHolderColor">@color/darker</color>
 
+    //Item
+    <color name="itemColor">@color/mediumGray</color>
+
     //Ingredients row layout
     <color name="strokeColor">@color/mediumGray</color>
     <color name="cardBackgroundColor">@color/darker</color>

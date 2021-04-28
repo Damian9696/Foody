@@ -30,6 +30,9 @@
     //ActionBar
     <color name="actionbarBackgroundColor">@color/colorPrimary</color>
 
+    //Item
+    <color name="itemColor">@color/darker</color>
+
     //Shimmer
     <color name="placeHolderColor">@color/mediumGray</color>
 
