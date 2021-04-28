@@ -30,6 +30,9 @@
     //ActionBar
     <color name="actionbarBackgroundColor">@color/darker</color>
 
+    //Shimmer
+    <color name="placeHolderColor">@color/darker</color>
+
     //Ingredients row layout
     <color name="strokeColor">@color/mediumGray</color>
     <color name="cardBackgroundColor">@color/darker</color>

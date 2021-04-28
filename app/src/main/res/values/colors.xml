@@ -18,7 +18,7 @@
 
     <!-- LIGHT THEME -->
 
-    //Background
+    //Fragment Background
     <color name="backgroundColor">@color/lightGray</color>
 
     //Chip style
@@ -29,6 +29,9 @@
 
     //ActionBar
     <color name="actionbarBackgroundColor">@color/colorPrimary</color>
+
+    //Shimmer
+    <color name="placeHolderColor">@color/mediumGray</color>
 
     //Ingredients row layout
     <color name="strokeColor">@color/lightMediumGray</color>
