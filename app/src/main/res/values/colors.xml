@@ -16,6 +16,11 @@
     <color name="yellow">#FFC114</color>
     <color name="green">#00C980</color>
 
+    <!-- LIGHT THEME -->
+
+    //Fragment Background
+    <color name="backgroundColor">@color/lightGray</color>
+
     //Chip style
     <color name="checkedChipBackgroundColor">#206200EA</color>
     <color name="uncheckedChipBackgroundColor">@color/lightGray</color>
@@ -25,15 +30,27 @@
     //ActionBar
     <color name="actionbarBackgroundColor">@color/colorPrimary</color>
 
+    //Item
+    <color name="itemColor">@color/darker</color>
+
+    //Shimmer
+    <color name="placeHolderColor">@color/mediumGray</color>
+
     //Ingredients row layout
     <color name="strokeColor">@color/lightMediumGray</color>
-    <color name="cardBackground">@color/white</color>
+    <color name="cardBackgroundColor">@color/white</color>
     <color name="cardBackgroundLightColor">#106200EA</color>
     <color name="titleColor">@color/darker</color>
+    <color name="descriptionColor">@color/darkGray</color>
 
     //Status bar
     <color name="statusBarColor">@color/colorPrimaryDark</color>
     <color name="contextualStatusBarColor">@color/darker</color>
     <color name="contextualActionBarColor">@color/dark</color>
+
+    //Bottom Navigation
+    <color name="bottomNavBackgroundColor">@color/white</color>
+    <color name="bottomNavItemIconColor">@color/darkGray</color>
+    <color name="bottomNavCheckedItemColor">@color/colorPrimary</color>
 
 </resources>
