@@ -67,12 +67,12 @@
 
                 <TextView
                     android:id="@+id/favourite_textView_recipes_description"
+                    parseHtml="@{favoritesEntity.result.summary}"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="12dp"
                     android:ellipsize="end"
                     android:maxLines="3"
-                    parseHtml="@{favoritesEntity.result.summary}"
                     android:textColor="@color/descriptionColor"
                     app:layout_constraintEnd_toEndOf="@+id/favourite_textView_recipes_title"
                     app:layout_constraintStart_toStartOf="@+id/favourite_textView_recipes_title"
@@ -95,9 +95,9 @@
 
                 <TextView
                     android:id="@+id/favourite_textView_heart"
-                    setNumberOfLikes="@{favoritesEntity.result.aggregateLikes}"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:text="@{String.valueOf(favoritesEntity.result.aggregateLikes)}"
                     android:textAlignment="center"
                     android:textColor="@color/red"
                     app:layout_constraintEnd_toStartOf="@id/favourite_textView_clock"
@@ -119,9 +119,9 @@
 
                 <TextView
                     android:id="@+id/favourite_textView_clock"
-                    setNumberOfMinutes="@{favoritesEntity.result.readyInMinutes}"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:text="@{String.valueOf(favoritesEntity.result.readyInMinutes)}"
                     android:textAlignment="center"
                     android:textColor="@color/yellow"
                     app:layout_constraintEnd_toStartOf="@id/favourite_textView_leaf"
