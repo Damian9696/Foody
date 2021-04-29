@@ -3,6 +3,7 @@ package com.example.foody.binding_adapters
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.view.isVisible
 import androidx.databinding.BindingAdapter
 import com.example.foody.data.databse.entities.RecipesEntity
 import com.example.foody.models.FoodRecipe
@@ -13,29 +14,22 @@ class RecipesBinding {
 
         @BindingAdapter("readApiResponse", "readDatabase", requireAll = true)
         @JvmStatic
-        fun ImageView.errorImageViewVisibility(
+        fun handleReadDataErrors(
+            view: View,
             apiResponse: NetworkResult<FoodRecipe>?,
             database: List<RecipesEntity>?
         ) {
-            if (apiResponse is NetworkResult.Error && database.isNullOrEmpty()) {
-                this.visibility = View.VISIBLE
-            } else if (apiResponse is NetworkResult.Loading || apiResponse is NetworkResult.Loading) {
-                this.visibility = View.INVISIBLE
+            when (view) {
+                is ImageView -> {
+                    view.isVisible = apiResponse is NetworkResult.Error && database.isNullOrEmpty()
+                }
+                is TextView -> {
+                    view.isVisible = apiResponse is NetworkResult.Error && database.isNullOrEmpty()
+                    view.text = apiResponse?.message.toString()
+                }
             }
         }
 
-        @BindingAdapter("readApiResponse2", "readDatabase2", requireAll = true)
-        @JvmStatic
-        fun TextView.errorTextViewVisibility(
-            apiResponse: NetworkResult<FoodRecipe>?,
-            database: List<RecipesEntity>?
-        ) {
-            if (apiResponse is NetworkResult.Error && database.isNullOrEmpty()) {
-                this.visibility = View.VISIBLE
-                this.text = apiResponse.message.toString()
-            } else if (apiResponse is NetworkResult.Loading || apiResponse is NetworkResult.Loading) {
-                this.visibility = View.INVISIBLE
-            }
-        }
+
     }
 }
