@@ -61,7 +61,7 @@ class RecipesFragment : Fragment(), SearchView.OnQueryTextListener {
             recipesViewModel.backOnline = it
         }
 
-        lifecycleScope.launch {
+        lifecycleScope.launchWhenStarted {
             networkListener = NetworkListener()
             context?.let { notNullContext ->
                 networkListener.checkInternetAvailability(notNullContext)
