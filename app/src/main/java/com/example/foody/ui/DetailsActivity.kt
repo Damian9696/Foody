@@ -32,6 +32,8 @@ class DetailsActivity : AppCompatActivity() {
     private var isRecipesSaved = false
     private var savedRecipeId = 0
 
+    private lateinit var saveToFavouritesItem: MenuItem
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -74,19 +76,19 @@ class DetailsActivity : AppCompatActivity() {
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.details_menu, menu)
-        val saveToFavouritesItem = menu?.findItem(R.id.save_to_favourites)
-        changeMenuItemColorIfRecipeIsSaved(saveToFavouritesItem)
+        menu?.let {
+            saveToFavouritesItem = it.findItem(R.id.save_to_favourites)
+            changeMenuItemColorIfRecipeIsSaved(saveToFavouritesItem)
+        }
         return true
     }
 
-    private fun changeMenuItemColorIfRecipeIsSaved(saveToFavouritesItem: MenuItem?) {
+    private fun changeMenuItemColorIfRecipeIsSaved(saveToFavouritesItem: MenuItem) {
         mainViewModel.readFavoriteRecipes.observe(this) { nullableListOfFavourites ->
             nullableListOfFavourites?.let { notNullListOfFavourites ->
                 for (savedRecipes in notNullListOfFavourites) {
                     if (savedRecipes.result.id == args.result.id) {
-                        saveToFavouritesItem?.let { notNullItem ->
-                            changeMenuItemColor(notNullItem, R.color.yellow)
-                        }
+                        changeMenuItemColor(saveToFavouritesItem, R.color.yellow)
                         isRecipesSaved = true
                         savedRecipeId = savedRecipes.id
                         break
@@ -142,5 +144,12 @@ class DetailsActivity : AppCompatActivity() {
 
     private fun changeMenuItemColor(item: MenuItem, color: Int) {
         item.icon.setTint(ContextCompat.getColor(this, color))
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        if (this::saveToFavouritesItem.isInitialized) {
+            changeMenuItemColor(saveToFavouritesItem, R.color.yellow)
+        }
     }
 }
