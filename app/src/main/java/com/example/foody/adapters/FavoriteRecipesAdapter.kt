@@ -60,12 +60,25 @@ class FavoriteRecipesAdapter(
         val item = favoriteRecipes[position]
         holder.bind(item)
 
+        saveItemStateOnScroll(holder, item)
+
         if (!this::rootView.isInitialized) {
             rootView = holder.itemView.rootView
         }
 
         onClick(holder, item)
         onLongClick(holder, item)
+    }
+
+    private fun saveItemStateOnScroll(
+        holder: FavoritesRecipesViewHolder,
+        currentRecipe: FavoritesEntity
+    ) {
+        if (selectedRecipes.contains(currentRecipe)) {
+            changeRecipeStyle(holder, R.color.cardBackgroundLightColor, R.color.colorPrimaryDark)
+        } else {
+            changeRecipeStyle(holder, R.color.cardBackgroundColor, R.color.strokeColor)
+        }
     }
 
     private fun applySelection(holder: FavoritesRecipesViewHolder, currentRecipe: FavoritesEntity) {
